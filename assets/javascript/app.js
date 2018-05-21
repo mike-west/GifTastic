@@ -20,7 +20,7 @@ function updateRaceGifs(data) {
     $("#race-gifs").empty();
     for(var i=0; i < data.length; ++i) {
         var imgUrl = data[i].images.original_still.url;
-        var img = $("<img>").attr("src", imgUrl);
+        var img = $("<img>").attr("src", imgUrl).attr("val", i);
         
         $("#race-gifs").append(img);
     }
@@ -49,8 +49,6 @@ window.onload = function (event) {
             console.log(resp.data);
             updateRaceGifs(resp.data);
         });
-
-
  
     });
 }
