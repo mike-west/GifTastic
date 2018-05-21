@@ -1,5 +1,6 @@
 var topics = ['NASCAR', 'Formula 1', 'Open Wheel Racng', 'Indianapolis 500', 'Legends Car Racing', 'Funny Car Drag Racing', 'Top Fuel Drag Racing',
-    'Motorcycle Racing', 'Snowmobile Racing', 'Drag Boat Racing', 'Sailboat Racing'];
+    'Motorcycle Racing', 'Snowmobile Racing', 'Drag Boat Racing', 
+    'Dog Sled Racing', 'Sailboat Racing'];
 
 var isStill = [];
 
