@@ -36,7 +36,7 @@ function updateRaceGifs(data) {
         var div = $("<div>");
         div.append(img);
         div.append(p);
-        div.addClass("img");
+        div.addClass("img-div");
 
         // add div to html
         $("#race-gifs").append(div);
@@ -52,6 +52,7 @@ function updateButtons() {
     // go through the topics and load buttons up
     for (var i = 0; i < topics.length; ++i) {
         var racerBtn = $("<button>").attr("class", "racer-btn").text(topics[i]);
+        racerBtn.addClass("btn").addClass("btn-outline-primary").addClass("btn-sm");
 
         $('#racing-btn').append(racerBtn);
     }
@@ -75,22 +76,6 @@ function updateButtons() {
 window.onload = function (event) {
 
     updateButtons();
-
-    // $(".racer-btn").on("click", function () {
-    //     // build query string
-    //     var query = makeQueryString($(this).text());
-    //     console.log(query);
-
-    //     // make ajax call
-    //     $.ajax({
-    //         url: query,
-    //         method: "GET"
-    //     }).then(function (resp) {
-    //         console.log(resp.data);
-    //         updateRaceGifs(resp.data);
-    //     });
-
-    // });
 
     $("#add-racer").on("click", function (event) {
         event.preventDefault();
