@@ -11,6 +11,12 @@ var queryParams = {
     "limit": "10"
 }
 
+// gifState is populated with an object for each image ---
+// {"s" : "still-img-url", "a": "animated-gif-url", "isStill": true/false}
+// when an image is clicked we get associated object, depending on whether the
+// current state is true/false; we swap in the new image and update the state
+var gifState = [];
+
 function makeQueryString(topic) {
     queryParams.q = topic;
     return queryURL + $.param(queryParams);
@@ -18,11 +24,15 @@ function makeQueryString(topic) {
 
 function updateRaceGifs(data) {
     $("#race-gifs").empty();
+    gifState.length = 0;
     for(var i=0; i < data.length; ++i) {
         var imgUrl = data[i].images.original_still.url;
-        var img = $("<img>").attr("src", imgUrl).attr("val", i);
+        var img = $("<img>").attr("src", imgUrl).attr("val", i).attr("class", "racer-img");
         
         $("#race-gifs").append(img);
+
+        var gifStatus = {"s": imgUrl, "a": data[i].images.looping.mp4, "isStill": true};
+        gifState.push(gifStatus);
     }
 
 }
@@ -51,6 +61,16 @@ window.onload = function (event) {
         });
  
     });
+
 }
 
-
+$(document.body).on("click", ".racer-img", function() {
+    console.log("I'm in img onclick");
+    var val = parseInt($(this).attr("val"));
+    var thisState = gifState[val];
+    if (thisState.isStill) {
+        $(this).attr("src", thisState.a);
+    } else {
+        $(this).attr("src", thisState.s);
+    }
+});
