@@ -2,8 +2,6 @@ var topics = ['NASCAR', 'Formula 1', 'Open Wheel Racng', 'Indianapolis 500', 'Le
     'Motorcycle Racing', 'Snowmobile Racing', 'Drag Boat Racing', 
     'Dog Sled Racing', 'Sailboat Racing'];
 
-var isStill = [];
-
 var queryURL = "https://api.giphy.com/v1/gifs/search?";
 
 var queryParams = {
@@ -13,8 +11,8 @@ var queryParams = {
 
 // gifState is populated with an object for each image ---
 // {"s" : "still-img-url", "a": "animated-gif-url", "isStill": true/false}
-// when an image is clicked we get associated object, depending on whether the
-// current state is true/false; we swap in the new image and update the state
+// when an image is clicked we get associated object, depending on whether
+// isStill is true/false; we swap in the new image and update the state
 var gifState = [];
 
 function makeQueryString(topic) {
