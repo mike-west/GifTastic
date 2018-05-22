@@ -1,5 +1,5 @@
 var topics = ['NASCAR', 'Formula 1', 'Open Wheel Racng', 'Indianapolis 500', 'Legends Car Racing', 'Funny Car Drag Racing', 'Top Fuel Drag Racing',
-    'Motorcycle Racing', 'Snowmobile Racing', 'Drag Boat Racing', 
+    'Motorcycle Racing', 'Snowmobile Racing', 'Drag Boat Racing',
     'Dog Sled Racing', 'Sailboat Racing'];
 
 var queryURL = "https://api.giphy.com/v1/gifs/search?";
@@ -23,7 +23,7 @@ function makeQueryString(topic) {
 function updateRaceGifs(data) {
     $("#race-gifs").empty();
     gifState.length = 0;
-    for(var i=0; i < data.length; ++i) {
+    for (var i = 0; i < data.length; ++i) {
         // create an img
         var imgUrl = data[i].images.original_still.url;
         var img = $("<img>").attr("src", imgUrl).attr("val", i).attr("class", "racer-img");
@@ -37,26 +37,25 @@ function updateRaceGifs(data) {
         div.append(img);
         div.append(p);
         div.addClass("img");
-        
+
         // add div to html
         $("#race-gifs").append(div);
 
-        var gifStatus = {"s": imgUrl, "a": data[i].images.original.url, "isStill": true};
+        var gifStatus = { "s": imgUrl, "a": data[i].images.original.url, "isStill": true };
         gifState.push(gifStatus);
     }
 
 }
 
-window.onload = function (event) {
-
+function updateButtons() {
+    $("#racing-btn").empty();
     // go through the topics and load buttons up
     for (var i = 0; i < topics.length; ++i) {
         var racerBtn = $("<button>").attr("class", "racer-btn").text(topics[i]);
 
         $('#racing-btn').append(racerBtn);
     }
-
-    $(".racer-btn").on("click", function() {
+    $(".racer-btn").on("click", function () {
         // build query string
         var query = makeQueryString($(this).text());
         console.log(query);
@@ -69,12 +68,40 @@ window.onload = function (event) {
             console.log(resp.data);
             updateRaceGifs(resp.data);
         });
- 
+
+    });
+}
+
+window.onload = function (event) {
+
+    updateButtons();
+
+    // $(".racer-btn").on("click", function () {
+    //     // build query string
+    //     var query = makeQueryString($(this).text());
+    //     console.log(query);
+
+    //     // make ajax call
+    //     $.ajax({
+    //         url: query,
+    //         method: "GET"
+    //     }).then(function (resp) {
+    //         console.log(resp.data);
+    //         updateRaceGifs(resp.data);
+    //     });
+
+    // });
+
+    $("#add-racer").on("click", function (event) {
+        event.preventDefault();
+        var addThis = $("#racer-name").val();
+        topics.push(addThis);
+        updateButtons();
     });
 
 }
 
-$(document.body).on("click", ".racer-img", function() {
+$(document.body).on("click", ".racer-img", function () {
     console.log("I'm in img onclick");
     var val = parseInt($(this).attr("val"));
     var thisState = gifState[val];
