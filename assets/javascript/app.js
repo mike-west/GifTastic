@@ -31,7 +31,7 @@ function updateRaceGifs(data) {
         
         $("#race-gifs").append(img);
 
-        var gifStatus = {"s": imgUrl, "a": data[i].images.looping.mp4, "isStill": true};
+        var gifStatus = {"s": imgUrl, "a": data[i].images.original.url, "isStill": true};
         gifState.push(gifStatus);
     }
 
@@ -70,7 +70,9 @@ $(document.body).on("click", ".racer-img", function() {
     var thisState = gifState[val];
     if (thisState.isStill) {
         $(this).attr("src", thisState.a);
+        thisState.isStill = false;
     } else {
         $(this).attr("src", thisState.s);
+        thisState.isStill = true;
     }
 });
