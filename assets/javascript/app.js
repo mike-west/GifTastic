@@ -24,10 +24,22 @@ function updateRaceGifs(data) {
     $("#race-gifs").empty();
     gifState.length = 0;
     for(var i=0; i < data.length; ++i) {
+        // create an img
         var imgUrl = data[i].images.original_still.url;
         var img = $("<img>").attr("src", imgUrl).attr("val", i).attr("class", "racer-img");
+
+        // create a <p> for the rating text
+        var p = $("<p>");
+        p.append("Rating: " + data[i].rating.toUpperCase());
+
+        // creat a div and add img and p to it
+        var div = $("<div>");
+        div.append(img);
+        div.append(p);
+        div.addClass("img");
         
-        $("#race-gifs").append(img);
+        // add div to html
+        $("#race-gifs").append(div);
 
         var gifStatus = {"s": imgUrl, "a": data[i].images.original.url, "isStill": true};
         gifState.push(gifStatus);
