@@ -30,6 +30,7 @@ function updateRaceGifs(data) {
 
         // create a <p> for the rating text
         var p = $("<p>");
+        p.attr('class', 'rating');
         p.append("Rating: " + data[i].rating.toUpperCase());
 
         // creat a div and add img and p to it

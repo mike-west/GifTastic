@@ -16,6 +16,10 @@ body {
     margin-top: 4px;
 }
 
+.rating {
+    color: #ffffff;
+}
+
 h1 {
     font-size: x-large;
     margin-bottom: 10px;
